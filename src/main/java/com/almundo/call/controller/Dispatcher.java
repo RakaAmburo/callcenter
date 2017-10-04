@@ -29,7 +29,7 @@ public class Dispatcher extends Thread {
     this.attendersCount = attenders.size();
   }
 
-  public void dispatchCall(Call call) {
+  public void acceptIncommingCall(Call call) {
 
     if (calls.offer(call)) {
       System.out.println("call added to queue, automatic response asking to wait");
@@ -39,19 +39,23 @@ public class Dispatcher extends Thread {
 
   }
 
+  private void dispatchCall() throws InterruptedException {
+    Call call = calls.take();
+    Employee employee = attenders.take();
+    call.setAttendant(employee);
+    call.setDispatchQueue(attenders);
+    callProcessing.execute(call);
+    if (call.isLastCall()) {
+      lastCall = true;
+    }
+  }
+
   public void run() {
 
     try {
 
       while (true) {
-        Call call = calls.take();
-        Employee employee = attenders.take();
-        call.setAttendant(employee);
-        call.setDispatchQueue(attenders);
-        callProcessing.execute(call);
-        if (call.isLastCall()) {
-          lastCall = true;
-        }
+        dispatchCall();
       }
 
     } catch (InterruptedException e) {

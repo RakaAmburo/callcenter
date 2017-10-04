@@ -27,17 +27,20 @@ public final class CallCenter {
 
     dispatcher.start();
 
-    dispatcher.dispatchCall(new Call("Customer A"));
-    dispatcher.dispatchCall(new Call("Customer B"));
-    dispatcher.dispatchCall(new Call("Customer C"));
-    dispatcher.dispatchCall(new Call("Customer D"));
-    dispatcher.dispatchCall(new Call("Customer E"));
-    dispatcher.dispatchCall(new Call("Customer F"));
-    dispatcher.dispatchCall(new Call("Customer G"));
-    dispatcher.dispatchCall(new Call("Customer H"));
+    dispatcher.acceptIncommingCall(new Call("Customer A"));
+    dispatcher.acceptIncommingCall(new Call("Customer B"));
+    dispatcher.acceptIncommingCall(new Call("Customer C"));
+    dispatcher.acceptIncommingCall(new Call("Customer D"));
+    dispatcher.acceptIncommingCall(new Call("Customer E"));
+    dispatcher.acceptIncommingCall(new Call("Customer F"));
+    dispatcher.acceptIncommingCall(new Call("Customer G"));
+    dispatcher.acceptIncommingCall(new Call("Customer H"));
+    dispatcher.acceptIncommingCall(new Call("Customer J"));
+    dispatcher.acceptIncommingCall(new Call("Customer K"));
+    dispatcher.acceptIncommingCall(new Call("Customer L"));
     Call call = new Call("Customer I");
     call.setLastCall(true);
-    dispatcher.dispatchCall(call);
+    dispatcher.acceptIncommingCall(call);
 
 
     dispatcher.stopDispatching();
