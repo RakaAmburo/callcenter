@@ -29,5 +29,7 @@
              files="."/>
    <suppress checks="RegexpSingleline"
              files="."/>
+   <suppress checks="JavadocVariable"
+             files="."/>
   
 </suppressions>

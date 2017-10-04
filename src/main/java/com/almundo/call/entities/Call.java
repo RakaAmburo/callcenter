@@ -1,47 +1,50 @@
 package com.almundo.call.entities;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+/** Clase encargada de manejar de forma liberada del thread principal la llamada en si. Las llamadas
+ * duran entre 5 y 10 segundos. Una vez terminada la llamada el assistene es devuelto al
+ * blockingqueue.
+ * 
+ * @author pablo.paparini */
 public class Call implements Runnable {
 
   // Time duration between 5 and 10 seconds
-  private int Low = 5000;
-  private int High = 10000;
-
-  public static List<Call> callsInProcess = new ArrayList<Call>();
+  private static final int LOW = 5000;
+  private static final int HIGHT = 10000;
 
   private boolean lastCall = false;
 
   private Employee attendant;
-  public BlockingQueue<Employee> dispatchQueue;
+  private BlockingQueue<Employee> dispatchQueue;
 
   private String customerName;
 
 
 
-  public Call(String customerName) {
+  /** constructor de la clase call
+   * 
+   * @param custName Nombre del cliente */
+  public Call(String custName) {
     super();
-    this.customerName = customerName;
+    this.customerName = custName;
   }
 
+  /** Metodo run del thread. */
   public void run() {
 
     Random r = new Random();
 
-    int callTime = r.nextInt(High - Low) + Low;
+    int callTime = r.nextInt(HIGHT - LOW) + LOW;
 
     try {
       System.out.println("Taking call from " + this.customerName + " => " + attendant.getName()
           + " (" + attendant.getClass().getSimpleName() + ")");
-      callsInProcess.add(this);
       Thread.sleep(callTime);
       System.out.println("Call ended for " + this.customerName + ", duration: "
           + TimeUnit.MILLISECONDS.toSeconds(callTime) + " Seconds.");
-      callsInProcess.remove(this);
       dispatchQueue.add(attendant);
     } catch (InterruptedException e) {
       e.printStackTrace();

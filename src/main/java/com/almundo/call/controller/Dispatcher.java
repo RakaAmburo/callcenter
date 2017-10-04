@@ -11,6 +11,10 @@ import java.util.concurrent.TimeUnit;
 import com.almundo.call.entities.Call;
 import com.almundo.call.entities.Employee;
 
+/** Clase controladora principial para las llamadas entrantes. Las llamadas son encoladas en un
+ * blocking queue y a medida que hay asistentes disponibles son puleadas.
+ * 
+ * @author pablo.paparini */
 public class Dispatcher extends Thread {
 
   private BlockingQueue<Employee> attenders;
@@ -19,12 +23,18 @@ public class Dispatcher extends Thread {
   private boolean lastCall = false;
 
 
-  public Dispatcher(List<Employee> attenders, int concurrentCalls, int availableLines) {
+  /** Constructor del dispatcher instancia los blocking queues que contendran las llamadas y los
+   * asistenes.
+   * 
+   * @param attdrs Lista de asistentes disponibles
+   * @param conCalls Cantidad de llamadas que se pueden attender concurrentemente
+   * @param availLines Cantidad de lineas en espera disponible */
+  public Dispatcher(List<Employee> attdrs, int conCalls, int availLines) {
 
     this.attenders = new PriorityBlockingQueue<Employee>();
-    this.attenders.addAll(attenders);
-    this.callProcessing = Executors.newFixedThreadPool(concurrentCalls);
-    this.calls = new ArrayBlockingQueue<Call>(availableLines);
+    this.attenders.addAll(attdrs);
+    this.callProcessing = Executors.newFixedThreadPool(conCalls);
+    this.calls = new ArrayBlockingQueue<Call>(availLines);
   }
 
   /** Metodo encargado de recibir las llamadas entrantes. Si hay lineas disponibles las encola para
@@ -41,6 +51,13 @@ public class Dispatcher extends Thread {
 
   }
 
+
+  /** Metodo despachador de llamadas. Gracias a los blocking queues (calls / attenders) queda a la
+   * espera de que entren llamadas y posteriormente que se leibere un assitente para asignarselo.
+   * Una vez asignado el assitente a la llamada, esa se encola en un executor que procesa
+   * concurrentemente las llamadas.
+   * 
+   * @throws InterruptedException */
   private void dispatchCall() throws InterruptedException {
     Call call = calls.take();
     Employee employee = attenders.take();
@@ -52,16 +69,17 @@ public class Dispatcher extends Thread {
     }
   }
 
+  /** Metodo run del thread. */
   public void run() {
 
     try {
 
-      while (true) {
+      while (!lastCall) {
         dispatchCall();
       }
 
     } catch (InterruptedException e) {
-      // TODO: handle exception
+      e.printStackTrace();
     }
 
 
@@ -69,11 +87,10 @@ public class Dispatcher extends Thread {
 
   public void stopDispatching() {
 
-    while (this.lastCall == false) {
+    while (!this.lastCall) {
       try {
         Thread.sleep(500);
       } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
     }
@@ -85,7 +102,7 @@ public class Dispatcher extends Thread {
       callProcessing.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
       this.interrupt();
     } catch (InterruptedException e) {
-      System.out.println("todo");
+      e.printStackTrace();
     }
 
   }
