@@ -35,10 +35,12 @@ public class Call implements Runnable {
     int callTime = r.nextInt(High - Low) + Low;
 
     try {
-      System.out.println("Taking call from " + this.customerName + " => " + attendant.getName());
+      System.out.println("Taking call from " + this.customerName + " => " + attendant.getName()
+          + " (" + attendant.getClass().getSimpleName() + ")");
       callsInProcess.add(this);
       Thread.sleep(callTime);
-      System.out.println("end call " + TimeUnit.MILLISECONDS.toSeconds(callTime));
+      System.out.println("Call ended for " + this.customerName + ", duration: "
+          + TimeUnit.MILLISECONDS.toSeconds(callTime) + " Seconds.");
       callsInProcess.remove(this);
       dispatchQueue.add(attendant);
     } catch (InterruptedException e) {

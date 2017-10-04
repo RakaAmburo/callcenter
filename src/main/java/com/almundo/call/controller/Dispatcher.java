@@ -13,28 +13,30 @@ import com.almundo.call.entities.Employee;
 
 public class Dispatcher extends Thread {
 
-  private BlockingQueue<Employee> attenders = new PriorityBlockingQueue<Employee>();
-  private BlockingQueue<Call> calls = new ArrayBlockingQueue<Call>(100);
-
+  private BlockingQueue<Employee> attenders;
+  private BlockingQueue<Call> calls;
   private ExecutorService callProcessing;
-
-  private int attendersCount;
-
   private boolean lastCall = false;
 
 
-  public Dispatcher(List<Employee> attenders, int concurrentCalls) {
+  public Dispatcher(List<Employee> attenders, int concurrentCalls, int availableLines) {
+
+    this.attenders = new PriorityBlockingQueue<Employee>();
     this.attenders.addAll(attenders);
-    callProcessing = Executors.newFixedThreadPool(10);
-    this.attendersCount = attenders.size();
+    this.callProcessing = Executors.newFixedThreadPool(concurrentCalls);
+    this.calls = new ArrayBlockingQueue<Call>(availableLines);
   }
 
+  /** Metodo encargado de recibir las llamadas entrantes. Si hay lineas disponibles las encola para
+   * ser despachadas ni bien se encuentre un asistente libre.
+   * 
+   * @param call */
   public void acceptIncommingCall(Call call) {
 
     if (calls.offer(call)) {
       System.out.println("call added to queue, automatic response asking to wait");
     } else {
-      System.out.println("No line available");
+      System.out.println("No line available, please call later.");
     }
 
   }
@@ -67,7 +69,6 @@ public class Dispatcher extends Thread {
 
   public void stopDispatching() {
 
-
     while (this.lastCall == false) {
       try {
         Thread.sleep(500);
@@ -77,8 +78,8 @@ public class Dispatcher extends Thread {
       }
     }
 
-    System.out.println("cerrando executor");
     callProcessing.shutdown();
+    System.out.println("Call Center is shutting down.");
 
     try {
       callProcessing.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);

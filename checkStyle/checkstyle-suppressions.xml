@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+ 
+<!DOCTYPE suppressions PUBLIC
+     "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+     "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+ 
+<suppressions>
+  <!-- <suppress checks="JavadocVariableCheck"
+             files="."/> -->
+  <!-- <suppress checks="JavadocStyleCheck"
+             files="."/> -->
+  <!-- <suppress checks="JavadocTypeCheck"
+             files="."/> -->
+  <!-- <suppress checks="JavadocMethodCheck"
+             files="."/> -->
+  <suppress checks="[a-zA-Z0-9]*"
+            files="com[\\/]almundo[\\/]call[\\/]App.java"/>
+  <suppress checks="AvoidInlineConditionals"
+             files="."/>
+  <suppress checks="JavadocPackageCheck"
+             files="."/>
+  <suppress checks="FinalParameters"
+             files="."/>
+  <suppress checks="FinalClass"
+             files="."/>
+  <suppress checks="DesignForExtension"
+             files="."/>
+   <suppress checks="NewlineAtEndOfFile"
+             files="."/>
+   <suppress checks="RegexpSingleline"
+             files="."/>
+  
+</suppressions>
