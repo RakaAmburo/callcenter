@@ -1,5 +1,7 @@
 package com.almundo.call.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -10,10 +12,21 @@ public class Call implements Runnable {
   private int Low = 5000;
   private int High = 10000;
 
+  public static List<Call> callsInProcess = new ArrayList<Call>();
+
+  private boolean lastCall = false;
+
   private Employee attendant;
-  private BlockingQueue<Employee> dispatchQueue;
+  public BlockingQueue<Employee> dispatchQueue;
+
+  private String customerName;
 
 
+
+  public Call(String customerName) {
+    super();
+    this.customerName = customerName;
+  }
 
   public void run() {
 
@@ -22,8 +35,11 @@ public class Call implements Runnable {
     int callTime = r.nextInt(High - Low) + Low;
 
     try {
+      System.out.println("Taking call from " + this.customerName + " => " + attendant.getName());
+      callsInProcess.add(this);
       Thread.sleep(callTime);
       System.out.println("end call " + TimeUnit.MILLISECONDS.toSeconds(callTime));
+      callsInProcess.remove(this);
       dispatchQueue.add(attendant);
     } catch (InterruptedException e) {
       e.printStackTrace();
@@ -46,5 +62,23 @@ public class Call implements Runnable {
   public void setDispatchQueue(BlockingQueue<Employee> dispatchQueue) {
     this.dispatchQueue = dispatchQueue;
   }
+
+  public String getCustomerName() {
+    return customerName;
+  }
+
+  public void setCustomerName(String customerName) {
+    this.customerName = customerName;
+  }
+
+  public boolean isLastCall() {
+    return lastCall;
+  }
+
+  public void setLastCall(boolean lastCall) {
+    this.lastCall = lastCall;
+  }
+
+
 
 }

@@ -9,20 +9,7 @@ public class Test {
 
   public static void main(String[] args) {
 
-    ExecutorService service = Executors.newFixedThreadPool(5);
 
-    service.execute(new Call());
-    service.execute(new Call());
-    service.execute(new Call());
-    service.execute(new Call());
-    service.execute(new Call());
-    service.execute(new Call());
-    service.execute(new Call());
-    service.execute(new Call());
-
-
-
-    service.shutdown();
 
   }
 

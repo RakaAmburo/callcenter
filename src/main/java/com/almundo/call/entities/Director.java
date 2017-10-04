@@ -2,7 +2,11 @@ package com.almundo.call.entities;
 
 public class Director extends Employee {
 
-  public static final int LEVEL = 2;
+  public Director(String name) {
+    super(name);
+  }
+
+  public static final int LEVEL = 3;
 
   @Override
   public int getLevel() {
