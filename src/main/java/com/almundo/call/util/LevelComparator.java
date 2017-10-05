@@ -14,9 +14,9 @@ public class LevelComparator implements Comparator<Employee> {
    * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object) */
   public int compare(Employee e1, Employee e2) {
 
-    if (e1.getLevel() < e2.getLevel()) {
+    if (e1.getPriority() < e2.getPriority()) {
       return -1;
-    } else if (e1.getLevel() > e2.getLevel()) {
+    } else if (e1.getPriority() > e2.getPriority()) {
       return 1;
     } else {
       return 0;

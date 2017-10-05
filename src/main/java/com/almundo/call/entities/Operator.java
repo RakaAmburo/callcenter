@@ -1,16 +1,22 @@
 package com.almundo.call.entities;
 
+/** Clase Operador.
+ * 
+ * @author pablo.paparini */
 public class Operator extends Employee {
 
+  /** Constructor.
+   * 
+   * @param name */
   public Operator(String name) {
     super(name);
   }
 
-  public static final int LEVEL = 1;
+  public static final int PRIORITY = 1;
 
   @Override
-  public int getLevel() {
-    return LEVEL;
+  public int getPriority() {
+    return PRIORITY;
   }
 
 }

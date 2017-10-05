@@ -1,16 +1,22 @@
 package com.almundo.call.entities;
 
+/** Clase Director.
+ * 
+ * @author pablo.paparini */
 public class Director extends Employee {
 
+  /** Constructor.
+   * 
+   * @param name */
   public Director(String name) {
     super(name);
   }
 
-  public static final int LEVEL = 3;
+  public static final int PRIORITY = 3;
 
   @Override
-  public int getLevel() {
-    return LEVEL;
+  public int getPriority() {
+    return PRIORITY;
   }
 
 }
