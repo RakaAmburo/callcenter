@@ -25,7 +25,7 @@ public abstract class Employee implements Comparable<Employee> {
    * 
    * @param other
    * @return */
-  public int compareTo1(Employee other) {
+  public int compareTo(Employee other) {
 
     if (this.getPriority() < other.getPriority()) {
       return -1;
