@@ -22,6 +22,8 @@ public class Dispatcher extends Thread {
   private ExecutorService callProcessing;
   private boolean lastCall = false;
 
+  private static final int SHUTDOWN_SLEEP = 500;
+
 
   /** Constructor del dispatcher instancia los blocking queues que contendran las llamadas y los
    * asistenes.
@@ -85,11 +87,14 @@ public class Dispatcher extends Thread {
 
   }
 
+  /** Metodo encargado de empezar el processo de apagado. espera a que la ultima llamada ingrese,
+   * ordena apgar el executor. Y una vez que el executor temrmino de procesar todo ordena un
+   * interrupt en caso de que el main thread siga vivo. */
   public void stopDispatching() {
 
     while (!this.lastCall) {
       try {
-        Thread.sleep(500);
+        Thread.sleep(SHUTDOWN_SLEEP);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

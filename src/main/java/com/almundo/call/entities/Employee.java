@@ -1,23 +1,31 @@
 package com.almundo.call.entities;
 
-/** Clase padre emleado.
+/** Clase padre empleado.
  * 
  * @author pablo.paparini */
 public abstract class Employee implements Comparable<Employee> {
 
   private String name;
 
+  /** Metodo que devuevle la prioridad de cada empleado.
+   * 
+   * @return */
   public abstract int getPriority();
 
-  /** Constructor
+  /** Constructor.
    * 
-   * @param name */
-  public Employee(String name) {
-    this.name = name;
+   * @param nombre */
+  public Employee(String nombre) {
+    this.name = nombre;
   }
 
 
-  public int compareTo(Employee other) {
+
+  /** Metodo comparador.
+   * 
+   * @param other
+   * @return */
+  public int compareTo1(Employee other) {
 
     if (this.getPriority() < other.getPriority()) {
       return -1;
@@ -29,6 +37,7 @@ public abstract class Employee implements Comparable<Employee> {
 
   }
 
+  /** @return */
   public String getName() {
     return name;
   }

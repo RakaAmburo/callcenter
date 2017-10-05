@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-/** Clase encargada de manejar de forma liberada del thread principal la llamada en si. Las llamadas
- * duran entre 5 y 10 segundos. Una vez terminada la llamada el assistene es devuelto al
+/** Clase encargada de manejar de forma liberada del thread principal la llamada en si. Las
+ * llamadas. duran entre 5 y 10 segundos. Una vez terminada la llamada el assistene es devuelto al
  * blockingqueue.
  * 
  * @author pablo.paparini */
@@ -24,7 +24,7 @@ public class Call implements Runnable {
 
 
 
-  /** constructor de la clase call
+  /** constructor de la clase call.
    * 
    * @param custName Nombre del cliente */
   public Call(String custName) {
@@ -52,34 +52,42 @@ public class Call implements Runnable {
 
   }
 
+  /** @return */
   public Employee getAttendant() {
     return attendant;
   }
 
+  /** @param attendant */
   public void setAttendant(Employee attendant) {
     this.attendant = attendant;
   }
 
+  /** @return */
   public BlockingQueue<Employee> getDispatchQueue() {
     return dispatchQueue;
   }
 
+  /** @param dispatchQueue */
   public void setDispatchQueue(BlockingQueue<Employee> dispatchQueue) {
     this.dispatchQueue = dispatchQueue;
   }
 
+  /** @return */
   public String getCustomerName() {
     return customerName;
   }
 
+  /** @param customerName */
   public void setCustomerName(String customerName) {
     this.customerName = customerName;
   }
 
+  /** @return */
   public boolean isLastCall() {
     return lastCall;
   }
 
+  /** @param lastCall */
   public void setLastCall(boolean lastCall) {
     this.lastCall = lastCall;
   }

@@ -17,6 +17,10 @@
             files="com[\\/]almundo[\\/]call[\\/]App.java"/>
   <suppress checks="[a-zA-Z0-9]*"
             files="com[\\/]almundo[\\/]call[\\/]util[\\/]LevelComparator.java"/>
+  <suppress checks="[a-zA-Z0-9]*"
+            files="com[\\/]almundo[\\/]call[\\/]controller[\\/]CallCenter.java"/>
+  <suppress checks="[a-zA-Z0-9]*"
+            files="com[\\/]almundo[\\/]call[\\/]entities[\\/]Employee.java"/>
   <suppress checks="AvoidInlineConditionals"
              files="."/>
   <suppress checks="JavadocPackageCheck"
