@@ -21,6 +21,7 @@ public class Dispatcher extends Thread {
   private BlockingQueue<Call> calls;
   private ExecutorService callProcessing;
   private boolean lastCall = false;
+  private int callsCount = 0;
 
   private static final int SHUTDOWN_SLEEP = 500;
 
@@ -66,6 +67,7 @@ public class Dispatcher extends Thread {
     call.setAttendant(employee);
     call.setDispatchQueue(attenders);
     callProcessing.execute(call);
+    callsCount++;
     if (call.isLastCall()) {
       lastCall = true;
     }
@@ -102,6 +104,7 @@ public class Dispatcher extends Thread {
 
     callProcessing.shutdown();
     System.out.println("Call Center is shutting down.");
+    System.out.println(callsCount + " calls will be processed");
 
     try {
       callProcessing.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);

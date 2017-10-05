@@ -10,3 +10,6 @@ El diagrama del uml lo puden encontrar en el root del proyecto en formato CallCe
 
 * Solución sobre que pasa con una llamada si no hay empleados libres:
 Eso lo pensé usando el executor, al que se le pueden asignar n threads, los que serán activados una vez encolados. Los excedentes quedaran en espera a que un              empleado, sea cual sea su rango, se libere. Más o menos como cuando llamas a un call center y quedas en espera. Algo parecido ocurre con las llamadas entrantes, se encolan en un queue (ArrayBlockingQueue) al que se le puede definir el límite de líneas.
+
+
+Conclusión: Variando los timpos de time out en TimeOut.java, la composicion de los empleados(operador, supervisor y director) y el tiempo promedio de llamada, se puede observar que composicion de equipo se necestia. ej: si las llamadas no son muchas, no deberia tener que atender un director, y escasamente un supervisor.
