@@ -13,3 +13,5 @@ Eso lo pensé usando el executor, al que se le pueden asignar n threads, los que 
 
 
 Conclusión: Variando los timpos de time out en TimeOut.java, la composicion de los empleados(operador, supervisor y director) y el tiempo promedio de llamada, se puede observar que composicion de equipo se necestia. ej: si las llamadas no son muchas, no deberia tener que atender un director, y escasamente un supervisor.
+
+NOTA: Agregue TestThreadSafe con un main para probar la entrada simultanea de 10 llamadas con la creación de varios threds.
