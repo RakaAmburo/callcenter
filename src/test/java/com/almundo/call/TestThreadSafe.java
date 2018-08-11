@@ -17,8 +17,8 @@ import com.almundo.call.entities.Supervisor;
  * 
  * @author pablo.paparini */
 public class TestThreadSafe extends Thread {
-
-  private volatile static boolean start = false;
+  
+  private volatile static Object lock = new Object();
 
   public static Dispatcher dispatcher;
 
@@ -28,9 +28,17 @@ public class TestThreadSafe extends Thread {
   }
 
   public void run() {
-    while (!start) {
-
-    }
+  
+	synchronized(lock) {
+		try {
+			lock.wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  
+	  
     for (int i = 0; i < 1; i++) {
       dispatcher.acceptIncommingCall(new Call("Customer"));
     }
@@ -58,12 +66,16 @@ public class TestThreadSafe extends Thread {
     for (int i = 0; i < 10; i++) {
       new TestThreadSafe();
     }
+    
+    setRandomTimeOut(10);
+    
     System.out.println("Se lanza");
-    start = true;
+    
+    synchronized (lock) {
+		lock.notifyAll();
+	}
 
-    setRandomTimeOut();
-    setRandomTimeOut();
-    setRandomTimeOut();
+    setRandomTimeOut(5);
 
     Call call = new Call("Customer LAST");
     call.setLastCall(true);

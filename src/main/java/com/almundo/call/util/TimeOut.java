@@ -1,6 +1,7 @@
 package com.almundo.call.util;
 
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class TimeOut {
 
@@ -21,6 +22,12 @@ public class TimeOut {
       e.printStackTrace();
     }
 
+  }
+  
+  public static void setRandomTimeOut(int times) {
+	  
+	  IntStream.rangeClosed(1, times).forEach(a -> setRandomTimeOut());
+	  
   }
 
 }
