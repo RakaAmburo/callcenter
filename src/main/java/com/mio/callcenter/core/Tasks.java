@@ -4,9 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import com.mio.callcenter.entities.Call;
-
-
-
+import com.mio.callcenter.util.TimeOut;
 
 public class Tasks {
 
@@ -30,31 +28,30 @@ public class Tasks {
 	public Runnable callProcessor(Call call, CallCenter cc) {
 		return () -> {
 			try {
+				TimeOut to = new TimeOut(5000, 10000);
 				// Taking call from log or web output
 				System.out.println("Taking call from " + call.getCustomer().getName() + " => "
 						+ call.getAttendant().getName() + " (" + call.getAttendant().getClass().getSimpleName() + ")");
-				Thread.sleep(100);
+				int time = to.setRandomTimeOut();
 				System.out.println("Call ended for " + call.getCustomer().getName() + ", duration: "
-						+ TimeUnit.MILLISECONDS.toSeconds(100) + " Seconds.");
+						+ TimeUnit.MILLISECONDS.toSeconds(time) + " Seconds. " + "Releasing " + call.getAttendant().getName());
 				// Ending call log or web output
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				e.printStackTrace();// log
 			} finally {
 				// return the employe to the attenderPool
-			   cc.returnAtender(call.getAttendant());
+				cc.returnAttender(call.getAttendant());
 			}
 
 		};
 	}
 
-	public Runnable dispatchCalls(String employee, String customer, String attenderPool) {
+	public Runnable dispatchCalls(Dispatcher disp) {
 		return () -> {
 			try {
-				while (true) {
-					throw new InterruptedException();
-				}
+				disp.dispatchCall();
 			} catch (InterruptedException e) {
-				e.printStackTrace();// log
+				e.printStackTrace();
 			}
 		};
 	}

@@ -4,6 +4,10 @@ public class Call {
 
 	private Employee attendant;
 	private Customer customer;
+	
+	public Call(Customer cust) {
+		this.customer = cust;
+	}
 
 	public Employee getAttendant() {
 		return attendant;

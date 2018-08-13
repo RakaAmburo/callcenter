@@ -5,29 +5,37 @@ import java.util.stream.IntStream;
 
 public class TimeOut {
 
-  // probar con numeros grandes para no hacer trabajar al director
-  private static final int LOW = 200;
-  private static final int HIGHT = 1000;
+	// probar con numeros grandes para no hacer trabajar al director
+	// private static final int LOW = 200;
+	// private static final int HIGHT = 1000;
 
-  public static void setRandomTimeOut() {
+	private int low;
+	private int high;
 
-    Random r = new Random();
+	public TimeOut(int l, int h) {
+		this.low = l;
+		this.high = h;
+	}
 
-    int time = r.nextInt(HIGHT - LOW) + LOW;
+	public int setRandomTimeOut() {
 
-    try {
-      Thread.sleep(time);
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+		Random r = new Random();
 
-  }
-  
-  public static void setRandomTimeOut(int times) {
-	  
-	  IntStream.rangeClosed(1, times).forEach(a -> setRandomTimeOut());
-	  
-  }
+		int time = r.nextInt(this.high - this.low + 1) + this.low;
+
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return time;
+
+	}
+
+	public void setRandomTimeOut(int times) {
+
+		IntStream.rangeClosed(1, times).forEach(this::setRandomTimeOut);
+
+	}
 
 }
