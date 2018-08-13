@@ -16,18 +16,22 @@ public class CallCenter {
 
 	private BlockingQueue<Employee> attenders;
 	private BlockingQueue<Call> availableLines;
-	private ExecutorService callInExecution;
+	private ExecutorService callsInExecution;
 	private Tasks task = new Tasks();
 	private ScheduledExecutorService dispatcherExecutor = Executors.newSingleThreadScheduledExecutor();
+	private ScheduledExecutorService shutDown = Executors.newSingleThreadScheduledExecutor();
+	private Dispatcher disp;
+	private int attrsCount = 0;
 
-	public CallCenter(List<Employee> attdrs, int inExecSize, int avLinesSize) {
+	public CallCenter(List<Employee> attdrs, int avLinesSize) {
 
+		this.attrsCount = attdrs.size();
 		this.attenders = new PriorityBlockingQueue<Employee>();
 		this.attenders.addAll(attdrs);
-		this.callInExecution = Executors.newFixedThreadPool(inExecSize);
+		this.callsInExecution = Executors.newFixedThreadPool(this.attrsCount);
 		this.availableLines = new ArrayBlockingQueue<Call>(avLinesSize);
 		
-		Dispatcher disp = new Dispatcher(this);
+		this.disp = new Dispatcher(this);
 		dispatcherExecutor.scheduleAtFixedRate(task.dispatchCalls(disp), 0, 1, TimeUnit.MILLISECONDS);
 
 	}
@@ -51,11 +55,37 @@ public class CallCenter {
 	}
 
 	public void processCall(Call call) {
-		callInExecution.execute(task.callProcessor(call, this));
+		callsInExecution.execute(task.callProcessor(call, this));
 	}
 
 	public void returnAttender(Employee at) {
 		this.attenders.add(at);
+	}
+	
+	public int getFreeAttdrsCount() {
+		return this.attenders.size();
+	}
+	
+	public int getOnHoldSize() {
+		return availableLines.size();
+	}
+	
+	public void initShutDownProcess() {
+		shutDown.scheduleAtFixedRate(task.shutDownProcess(this), 2, 5, TimeUnit.SECONDS);
+	}
+	
+	public void shutDownSystem() {
+		shutDown.shutdownNow();
+		System.out.println("Interupting take lock:");
+		dispatcherExecutor.shutdownNow();
+		callsInExecution.shutdown();	
+	    System.out.println("Call Center is shutting down.");
+	    System.out.println(disp.getCallsCount() + " calls have been processed");
+	   
+	}
+	
+	public int getAttrsCount() {
+		return attrsCount;
 	}
 
 }

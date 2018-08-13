@@ -18,7 +18,7 @@ public class SimpleTest {
 	
 	public static void main(String[] args) {
 		
-		String operators = "Jesus,Joseph,Aline,Peter,Steve,Vauhn,Jon,Silvia";
+		String operators = "Jesus,Joseph,Aline,Peter,Steve,Vauhn,Jon,Silvia,Ruperto";
 		List<Employee> attenders = Arrays.stream(operators.split(",")).map(String::trim).map(a -> new Operator(a))
 				.collect(Collectors.toList());
 
@@ -26,13 +26,16 @@ public class SimpleTest {
 		attenders.add(new Supervisor("Andy"));
 		attenders.add(new Director("Alfred"));
 		
-		CallCenter cc = new CallCenter(attenders, 10, 15);
+		CallCenter cc = new CallCenter(attenders, 15);
 		
 		TimeOut to = new TimeOut(200, 1000);
 		
-		IntStream.rangeClosed('A', 'Z').mapToObj(a -> new Customer(String.valueOf((char)a)))
+		System.out.println("Number of calls: " + 30);
+		
+		IntStream.rangeClosed(1, 30).mapToObj(a -> new Customer())
 		.forEach(a -> {cc.acceptIncommingCall(new Call(a)); to.setRandomTimeOut();});
 		
+		cc.initShutDownProcess();
 		
 	}
 

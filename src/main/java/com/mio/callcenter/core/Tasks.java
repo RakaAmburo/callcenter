@@ -51,9 +51,24 @@ public class Tasks {
 			try {
 				disp.dispatchCall();
 			} catch (InterruptedException e) {
+				System.out.println("Interrupted Dispatcher");
+			}
+		};
+	}
+	
+	public Runnable shutDownProcess(CallCenter cc) {
+		return () -> {
+			try {
+				System.out.println("trying to shutdown system: Onholde=" + cc.getOnHoldSize() + " Attenders size: " + cc.getFreeAttdrsCount());
+				if (cc.getOnHoldSize() == 0 && cc.getFreeAttdrsCount() == cc.getAttrsCount()) {
+					cc.shutDownSystem();
+				}
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		};
 	}
+	
+	public Runnable concurrentTest()
 
 }

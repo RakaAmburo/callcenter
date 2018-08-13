@@ -1,11 +1,13 @@
 package com.mio.callcenter.entities;
 
+import com.mio.callcenter.util.ShortUuid;
+
 public class Customer {
 	
 	private String name;
 	
-	public Customer(String n) {
-		this.name = n;
+	public Customer() {
+		this.name = ShortUuid.shortUUID();
 	}
 
 	public String getName() {
