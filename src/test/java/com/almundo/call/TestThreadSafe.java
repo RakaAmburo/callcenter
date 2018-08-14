@@ -18,7 +18,7 @@ import com.almundo.call.entities.Supervisor;
  * @author pablo.paparini */
 public class TestThreadSafe extends Thread {
   
-  private volatile static Object lock = new Object();
+  private static Object lock = new Object();
 
   public static Dispatcher dispatcher;
 

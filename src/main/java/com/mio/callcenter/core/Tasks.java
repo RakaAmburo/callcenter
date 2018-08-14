@@ -3,7 +3,10 @@ package com.mio.callcenter.core;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
 import com.mio.callcenter.entities.Call;
+import com.mio.callcenter.entities.Customer;
 import com.mio.callcenter.util.TimeOut;
 
 public class Tasks {
@@ -69,6 +72,19 @@ public class Tasks {
 		};
 	}
 	
-	public Runnable concurrentTest()
+	public Runnable concurrentTest(Object lock, int nCalls, CallCenter cc) {
+		return () -> {
+			synchronized(lock) {
+				try {
+					lock.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			TimeOut to = new TimeOut(1000, 10000);
+			IntStream.rangeClosed(1, nCalls).mapToObj(a -> new Customer())
+			.forEach(a -> {cc.acceptIncommingCall(new Call(a)); to.setRandomTimeOut();});
+		};
+	}
 
 }

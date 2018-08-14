@@ -22,6 +22,7 @@ public class CallCenter {
 	private ScheduledExecutorService shutDown = Executors.newSingleThreadScheduledExecutor();
 	private Dispatcher disp;
 	private int attrsCount = 0;
+	private int rejectedCalls = 0;
 
 	public CallCenter(List<Employee> attdrs, int avLinesSize) {
 
@@ -42,6 +43,7 @@ public class CallCenter {
 			System.out.println("call added to queue, automatic response asking to wait");
 		} else {
 			System.out.println("No line available, please call later.");
+			rejectedCalls++;
 		}
 
 	}
@@ -81,6 +83,7 @@ public class CallCenter {
 		callsInExecution.shutdown();	
 	    System.out.println("Call Center is shutting down.");
 	    System.out.println(disp.getCallsCount() + " calls have been processed");
+	    System.out.println(rejectedCalls + " calls have been rejected");
 	   
 	}
 	

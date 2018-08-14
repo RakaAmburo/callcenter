@@ -34,7 +34,7 @@ public class TimeOut {
 
 	public void setRandomTimeOut(int times) {
 
-		IntStream.rangeClosed(1, times).forEach(this::setRandomTimeOut);
+		IntStream.rangeClosed(1, times).forEach(a -> this.setRandomTimeOut());
 
 	}
 
