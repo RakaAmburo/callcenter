@@ -2,7 +2,9 @@ package com.mio.callcenter.util;
 
 import java.util.Comparator;
 
-import com.almundo.call.entities.Employee;
+import com.mio.callcenter.entities.Employee;
+
+
 
 /** Clase finalmente no usada uso comparable para el blocking queue.
  * 

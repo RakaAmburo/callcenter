@@ -1,4 +1,4 @@
-package com.almundo.call.controller;
+package com.mio.callcenter.entities;
 
 /** No usada por ahora, con esto podriamos manejar diversos estados de los asistentes admeas de los
  * que estan.
