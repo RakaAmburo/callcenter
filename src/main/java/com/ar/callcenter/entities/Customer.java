@@ -1,6 +1,6 @@
-package com.mio.callcenter.entities;
+package com.ar.callcenter.entities;
 
-import com.mio.callcenter.util.ShortUuid;
+import com.ar.callcenter.util.ShortUuid;
 
 public class Customer {
 	

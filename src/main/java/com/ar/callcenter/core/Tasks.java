@@ -1,13 +1,13 @@
-package com.mio.callcenter.core;
+package com.ar.callcenter.core;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import com.mio.callcenter.entities.Call;
-import com.mio.callcenter.entities.Customer;
-import com.mio.callcenter.util.TimeOut;
+import com.ar.callcenter.entities.Call;
+import com.ar.callcenter.entities.Customer;
+import com.ar.callcenter.util.TimeOut;
 
 public class Tasks {
 

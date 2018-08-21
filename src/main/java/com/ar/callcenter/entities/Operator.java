@@ -1,18 +1,18 @@
-package com.mio.callcenter.entities;
+package com.ar.callcenter.entities;
 
-/** Clase Director.
+/** Clase Operador.
  * 
  * @author pablo.paparini */
-public class Director extends Employee {
+public class Operator extends Employee {
 
   /** Constructor.
    * 
    * @param name */
-  public Director(String name) {
+  public Operator(String name) {
     super(name);
   }
 
-  public static final int PRIORITY = 3;
+  public static final int PRIORITY = 1;
 
   @Override
   public int getPriority() {

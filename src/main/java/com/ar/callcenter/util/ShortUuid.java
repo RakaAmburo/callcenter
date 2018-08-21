@@ -1,4 +1,4 @@
-package com.mio.callcenter.util;
+package com.ar.callcenter.util;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;

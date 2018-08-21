@@ -1,4 +1,4 @@
-package com.mio.callcenter.entities;
+package com.ar.callcenter.entities;
 
 /** Clase padre empleado.
  * 

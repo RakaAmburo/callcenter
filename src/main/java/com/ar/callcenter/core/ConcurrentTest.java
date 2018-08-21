@@ -1,4 +1,4 @@
-package com.mio.callcenter.core;
+package com.ar.callcenter.core;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,11 +7,11 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.mio.callcenter.entities.Director;
-import com.mio.callcenter.entities.Employee;
-import com.mio.callcenter.entities.Operator;
-import com.mio.callcenter.entities.Supervisor;
-import com.mio.callcenter.util.TimeOut;
+import com.ar.callcenter.entities.Director;
+import com.ar.callcenter.entities.Employee;
+import com.ar.callcenter.entities.Operator;
+import com.ar.callcenter.entities.Supervisor;
+import com.ar.callcenter.util.TimeOut;
 
 public class ConcurrentTest {
 	

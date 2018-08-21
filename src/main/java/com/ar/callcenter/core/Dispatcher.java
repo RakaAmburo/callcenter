@@ -1,8 +1,8 @@
-package com.mio.callcenter.core;
+package com.ar.callcenter.core;
 
 
-import com.mio.callcenter.entities.Call;
-import com.mio.callcenter.entities.Employee;
+import com.ar.callcenter.entities.Call;
+import com.ar.callcenter.entities.Employee;
 
 public class Dispatcher {
 	

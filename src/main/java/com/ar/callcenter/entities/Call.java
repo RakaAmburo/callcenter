@@ -1,4 +1,4 @@
-package com.mio.callcenter.entities;
+package com.ar.callcenter.entities;
 
 public class Call {
 

@@ -1,4 +1,4 @@
-package com.mio.callcenter.core;
+package com.ar.callcenter.core;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -9,8 +9,8 @@ import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.mio.callcenter.entities.Call;
-import com.mio.callcenter.entities.Employee;
+import com.ar.callcenter.entities.Call;
+import com.ar.callcenter.entities.Employee;
 
 public class CallCenter {
 
