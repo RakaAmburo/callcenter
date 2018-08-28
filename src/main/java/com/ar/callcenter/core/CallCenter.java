@@ -26,6 +26,7 @@ public class CallCenter {
 
 	public CallCenter(List<Employee> attdrs, int avLinesSize) {
 
+		System.out.println("Call Center Starting Up...");
 		this.attrsCount = attdrs.size();
 		this.attenders = new PriorityBlockingQueue<Employee>();
 		this.attenders.addAll(attdrs);

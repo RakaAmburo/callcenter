@@ -2,6 +2,7 @@ package com.ar.callcenter.core;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class ConcurrentTest {
 	
 	public int poolSize = 20;
 	public int loopCount = 10;
-	public Object lock = new Object();//volatile??
+	public CountDownLatch lock = new CountDownLatch(1);
 	public ExecutorService threadPool = Executors.newFixedThreadPool(poolSize);
 	
 	public static void main(String[] args) {
@@ -42,9 +43,7 @@ public class ConcurrentTest {
 		System.out.println("Call size: "+ (ct.loopCount * ct.poolSize));
 		System.out.println("Starting...");
 		
-		synchronized (ct.lock) {
-			ct.lock.notifyAll();
-		}
+		ct.lock.countDown();
 		
 		to.setRandomTimeOut(3);
 		

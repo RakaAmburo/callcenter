@@ -1,5 +1,6 @@
 package com.ar.callcenter.core;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -72,11 +73,11 @@ public class Tasks {
 		};
 	}
 	
-	public Runnable concurrentTest(Object lock, int nCalls, CallCenter cc) {
+	public Runnable concurrentTest(CountDownLatch lock, int nCalls, CallCenter cc) {
 		return () -> {
 			synchronized(lock) {
 				try {
-					lock.wait();
+					lock.await();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
