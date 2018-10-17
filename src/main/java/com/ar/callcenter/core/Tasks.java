@@ -75,7 +75,7 @@ public class Tasks {
 	
 	public Runnable concurrentTest(CountDownLatch lock, int nCalls, CallCenter cc) {
 		return () -> {
-			synchronized(lock) {
+			synchronized(lock) {// ver si el sync es necesario
 				try {
 					lock.await();
 				} catch (InterruptedException e) {

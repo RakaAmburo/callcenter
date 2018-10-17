@@ -79,7 +79,7 @@ public class CallCenter {
 	
 	public void shutDownSystem() {
 		shutDown.shutdownNow();
-		System.out.println("Interupting take lock:");
+		System.out.println("Interrupting take lock:");
 		dispatcherExecutor.shutdownNow();
 		callsInExecution.shutdown();	
 	    System.out.println("Call Center is shutting down.");
